@@ -4,18 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cow Cat CMS</title>
+    <title>中国商会联盟</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" type="text/css" href="{{ elixir('assets/backend/css/app.min.css') }}">
 </head>
 <body id="login" class="hold-transition login-page" style="background-image: url('{{array_random(config('cowcat.background-images'))}}');">
 <div class="login-box">
     <div class="login-logo">
-        <b>CowCat</b> CMS
+        <b>中国商会联盟</b> CMS
     </div>
     <div class="login-box-body">
         <p class="login-box-msg">
-            Happy Coding
+            后台登录
         </p>
         <form action="{{URL::to('/auth/login')}}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">

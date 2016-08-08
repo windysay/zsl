@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Facades\ShopCatRepository;
+use App\Facades\ShopRepository;
+use App\Facades\ShopStoreRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\MenuRepository;
 use App\Repositories\RoleRepository;
@@ -35,6 +38,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->registerRoleRepository();
         $this->registerActionRepository();
         $this->registerPermissionRepository();
+        $this->registerShopRepository();
+        $this->registerShopCatRepository();
+        $this->registerShopStoreRepository();
     }
 
     /**
@@ -94,6 +100,39 @@ class RepositoryServiceProvider extends ServiceProvider
             $validator = $app['validator'];
 
             return new PermissionRepository($permission, $validator);
+        });
+    }
+
+    public function registerShopRepository()
+    {
+        $this->app->singleton('shoprepository', function ($app) {
+            $model = config('repository.models.shop');
+            $shop = new $model();
+            $validator = $app['validator'];
+
+            return new ShopRepository($shop, $validator);
+        });
+    }
+
+    public function registerShopCatRepository()
+    {
+        $this->app->singleton('shopcatrepository', function ($app) {
+            $model = config('repository.models.shopcat');
+            $shop = new $model();
+            $validator = $app['validator'];
+
+            return new ShopCatRepository($shop, $validator);
+        });
+    }
+
+    public function registerShopStoreRepository()
+    {
+        $this->app->singleton('shopstorerepository', function ($app) {
+            $model = config('repository.models.shopstore');
+            $shop = new $model();
+            $validator = $app['validator'];
+
+            return new ShopStoreRepository($shop, $validator);
         });
     }
 }

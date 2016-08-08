@@ -13,7 +13,10 @@
         "predis/predis": "~1.0",
         "laravelcollective/html": "5.1.x-dev",
         "zizaco/entrust": "5.2.x-dev",
-        "orangehill/iseed": "^2.1"
+        "orangehill/iseed": "^2.1",
+        "dingo/api": "1.0.*@dev",
+        "tymon/jwt-auth": "^0.5.9",
+        "lucadegasperi/oauth2-server-laravel": "5.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

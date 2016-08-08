@@ -27,7 +27,7 @@ class MenuCreateForm extends Request
             'name'        => 'required',
             'parent_id'   => 'required',
             'description' => 'required',
-            'route'       => 'required|unique:menus',
+            'route'       => 'required',//|unique:menus
         ];
     }
 
@@ -43,7 +43,7 @@ class MenuCreateForm extends Request
             'parent_id.required'   => '父级分类不能为空',
             'description.required' => '菜单描述不能为空',
             'route.required'       => '菜单路由不能为空',
-            'route.unique'         => '菜单路由必须唯一',
+            //'route.unique'         => '菜单路由必须唯一',
         ];
     }
 }
