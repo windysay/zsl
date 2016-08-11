@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Facades\ShopCatRepository;
-use App\Facades\ShopRepository;
-use App\Facades\ShopStoreRepository;
+use App\Repositories\ShopCatRepository;
+use App\Repositories\ShopRepository;
+use App\Repositories\ShopStoreRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\MenuRepository;
 use App\Repositories\RoleRepository;

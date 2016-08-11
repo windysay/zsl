@@ -1,5 +1,5 @@
 <header class="main-header">
-    <a href="index2.html" class="logo"><b>Cow</b>Cat</a>
+    <a href="index2.html" class="logo"><b>中商联管理后台</b></a>
     <nav class="navbar navbar-static-top" role="navigation">
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>

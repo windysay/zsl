@@ -5,7 +5,7 @@ namespace App\Repositories;
 /**
  * Shop Model Repository
  */
-class ShopRepository extends CommonRepository
+class ShopStoreRepository extends CommonRepository
 {
 
     public function clearCache()

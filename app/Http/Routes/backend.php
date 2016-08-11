@@ -4,6 +4,21 @@ Route::get('index/', [
     'as'   => 'backend.index.index',
     'uses' => 'IndexController@index',
 ]);
+Route::get('/', [
+    'as'   => 'backend.index.index',
+    'uses' => 'IndexController@index',
+]);
+
+/* 商会管理模块 */
+Route::get('shop/index', [
+    'as'   => 'backend.shop.index',
+    'uses' => 'ShopController@index',
+]);
+Route::get('shop/store', [
+    'as'   => 'backend.shop.store',
+    'uses' => 'ShopController@store',
+]);
+Route::resource('shop', 'ShopController');
 
 /* 菜单管理模块 */
 Route::get('menu/search', [
