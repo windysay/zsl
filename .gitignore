@@ -7,3 +7,5 @@ Homestead.json
 .idea
 /storage
 .vagrant
+/.env
+_ide_helper.php

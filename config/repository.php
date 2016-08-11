@@ -9,5 +9,5 @@ return [
         'shop'       => 'App\Models\Shop',
         'articlecat'  => 'App\Models\ArticleCat',
     ],
-    'page-limit' => 50,
+    'page-limit' => 10,
 ];
