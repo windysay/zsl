@@ -7,8 +7,7 @@ return [
         'action'     => 'App\Models\Action',
         'permission' => 'App\Models\Permission',
         'shop'       => 'App\Models\Shop',
-        'shopcat'    => 'App\Models\ShopCat',
-        'shopstore'  => 'App\Models\ShopStore',
+        'articlecat'  => 'App\Models\ArticleCat',
     ],
     'page-limit' => 50,
 ];

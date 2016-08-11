@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Facade;
 /**
  * This is the menu repository facade class
  */
-class ShopCatRepository extends Facade
+class ArticleCatRepository extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'shopcatrepository';
+        return 'articlecatrepository';
     }
 }

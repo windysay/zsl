@@ -28,6 +28,9 @@ Route::get('menu/search', [
 ]);
 Route::resource('menu', 'MenuController');
 
+/* 文章栏目管理模块 */
+Route::resource('articlecat', 'ArticleCatController');
+
 /* 用户管理模块 */
 Route::resource("user", 'UserController');
 

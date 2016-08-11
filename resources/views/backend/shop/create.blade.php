@@ -13,16 +13,16 @@
                         <div class="form-group">
                             <label>商户类型</label>
                             <select class="form-control select2" name="cat_id" style="width: 100%;">
-                                @foreach($shopCat as $cat)
-                                    <option value="{{$cat->id}}">{{$cat->cat_name}}</option>
+                                @foreach(config('shop.shop_cat') as $key => $cat)
+                                    <option value="{{$key}}">{{$cat}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label>商户商号</label>
                             <select class="form-control select2" name="store_id" style="width: 100%;">
-                                @foreach($shopStore as $store)
-                                    <option value="{{$store->id}}">{{$store->store_name}}</option>
+                                @foreach(config('shop.shop_store') as $key => $store)
+                                    <option value="{{$key}}">{{$store}}</option>
                                 @endforeach
                             </select>
                         </div>

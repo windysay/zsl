@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ShopCat extends Model
+class ArticleCat extends Model
 {
     /**
      * 限制读取字段
@@ -17,5 +17,5 @@ class ShopCat extends Model
      *
      * @var string
      */
-    protected $table = "shop_cat";
+    protected $table = "article_cat";
 }

@@ -2,9 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repositories\ShopCatRepository;
+use App\Repositories\ArticleCatRepository;
 use App\Repositories\ShopRepository;
-use App\Repositories\ShopStoreRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\MenuRepository;
 use App\Repositories\RoleRepository;
@@ -39,8 +38,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->registerActionRepository();
         $this->registerPermissionRepository();
         $this->registerShopRepository();
-        $this->registerShopCatRepository();
-        $this->registerShopStoreRepository();
+        $this->registerArticleCatRepository();
     }
 
     /**
@@ -114,25 +112,14 @@ class RepositoryServiceProvider extends ServiceProvider
         });
     }
 
-    public function registerShopCatRepository()
+    public function registerArticleCatRepository()
     {
-        $this->app->singleton('shopcatrepository', function ($app) {
-            $model = config('repository.models.shopcat');
-            $shop = new $model();
+        $this->app->singleton('articlecatrepository', function ($app) {
+            $model = config('repository.models.articlecat');
+            $cat = new $model();
             $validator = $app['validator'];
 
-            return new ShopCatRepository($shop, $validator);
-        });
-    }
-
-    public function registerShopStoreRepository()
-    {
-        $this->app->singleton('shopstorerepository', function ($app) {
-            $model = config('repository.models.shopstore');
-            $shop = new $model();
-            $validator = $app['validator'];
-
-            return new ShopStoreRepository($shop, $validator);
+            return new ArticleCatRepository($cat, $validator);
         });
     }
 }

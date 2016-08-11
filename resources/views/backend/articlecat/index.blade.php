@@ -1,14 +1,14 @@
 @extends("backend.layout.main")
 
-@inject("shopPresenter","App\Presenters\ShopPresenter")
+@inject('actionPresenter','App\Presenters\ArticleCatPresenter')
 
 @section("content")
-    @include('backend.components.handle',$handle = $shopPresenter->getHandle())
+    @include('backend.components.handle',$handle = $actionPresenter->getHandle())
     <div class="row">
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">商户列表</h3>
+                    <h3 class="box-title">操作列表</h3>
 
                     <div class="box-tools">{!! $data->render() !!}</div>
                 </div>
@@ -16,26 +16,22 @@
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
-                            <th>商会ID</th>
-                            <th>商会名</th>
-                            <th>状态</th>
-                            <th>客服电话</th>
-                            <th>邮箱</th>
-                            <th>注册人</th>
+                            <th>栏目ID</th>
+                            <th>栏目名称</th>
+                            <th>父栏目ID</th>
+                            <th>排序</th>
                             <th>操作</th>
                         </tr>
                         @foreach($data as $item)
                             <tr>
                                 <td>{{$item->id}}</td>
-                                <td>{{$item->shop_name}}</td>
-                                <td>{{$item->status}}</td>
-                                <td>{{$item->shop_tel}}</td>
-                                <td>{{$item->shop_email}}</td>
-                                <td>{{$item->user_name}}</td>
+                                <td>{{$item->cat_name}}</td>
+                                <td>{{$item->parent_id}}</td>
+                                <td>{{$item->sort}}</td>
                                 <td>
-                                    <a href="{{route('backend.shop.edit',['id'=>$item->id])}}" class="btn btn-primary btn-flat">编辑</a>
+                                    <a href="{{route('backend.articlecat.edit',['id'=>$item->id])}}" class="btn btn-primary btn-flat">编辑</a>
                                     <button class="btn btn-danger btn-flat"
-                                            data-url="{{URL::to('backend/shop/'.$item->id)}}"
+                                            data-url="{{URL::to('backend/articlecat/'.$item->id)}}"
                                             data-toggle="modal"
                                             data-target="#delete-modal"
                                     >
@@ -56,5 +52,5 @@
     </div>
 @endsection
 @section("after.js")
-    @include('backend.components.modal.delete',['title'=>'操作提示','content'=>'你确定要删除这名用户吗?'])
+    @include('backend.components.modal.delete',['title'=>'操作提示','content'=>'你确定要删除这个操作吗?'])
 @endsection

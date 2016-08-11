@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Facades\ShopCatRepository;
 use App\Facades\ShopRepository;
-use App\Facades\ShopStoreRepository;
 use App\Facades\UserRepository;
 use App\Models\Shop;
 use App\Models\User;
@@ -39,9 +37,6 @@ class ShopController extends Controller
      */
     public function create()
     {
-        $shopCat = ShopCatRepository::all();
-        $shopStore = ShopStoreRepository::all();
-
         return view("backend.shop.create", compact('shopCat','shopStore'));
     }
 
@@ -121,10 +116,8 @@ class ShopController extends Controller
     public function edit($id)
     {
         $shop = ShopRepository::find($id);
-        $shopCat = ShopCatRepository::all();
-        $shopStore = ShopStoreRepository::all();
 
-        return view('backend.shop.edit', compact('shop', 'shopCat', 'shopStore'));
+        return view('backend.shop.edit', compact('shop'));
     }
 
     /**
