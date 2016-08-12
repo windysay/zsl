@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label for="sort">栏目排序</label>
-                            <input type="text" class="form-control" id="sort" name="sort" placeholder="栏目排序" value="0" value="{{old('sort')}}">
+                            <input type="text" class="form-control" id="sort" name="sort" placeholder="栏目排序" value="{{old('sort')}}">
                         </div>
                     </div>
                     <div class="box-footer clearfix">

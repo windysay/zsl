@@ -18,6 +18,8 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\VerifyCsrfToken::class,
+
+        \LucaDegasperi\OAuth2Server\Middleware\OAuthExceptionHandlerMiddleware::class,
     ];
 
     /**
@@ -34,5 +36,12 @@ class Kernel extends HttpKernel
         'permission'   => \Zizaco\Entrust\Middleware\EntrustPermission::class,
         'ability'      => \Zizaco\Entrust\Middleware\EntrustAbility::class,
         'authorize'    => \App\Http\Middleware\Authorize::class,
+
+        /* API接口 */
+        'oauth' => \LucaDegasperi\OAuth2Server\Middleware\OAuthMiddleware::class,
+        'oauth-user' => \LucaDegasperi\OAuth2Server\Middleware\OAuthUserOwnerMiddleware::class,
+        'oauth-client' => \LucaDegasperi\OAuth2Server\Middleware\OAuthClientOwnerMiddleware::class,
+        'check-authorization-params' => \LucaDegasperi\OAuth2Server\Middleware\CheckAuthCodeRequestMiddleware::class,
+        'csrf' => \App\Http\Middleware\VerifyCsrfToken::class,
     ];
 }

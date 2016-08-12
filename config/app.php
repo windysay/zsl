@@ -153,6 +153,14 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
+
+        /* API接口 */
+        App\Providers\OAuthServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
+        LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
+        //Ueditor 百度富文本编辑器
+        Stevenyangecho\UEditor\UEditorServiceProvider::class,
     ],
 
     /*
@@ -167,6 +175,10 @@ return [
     */
 
     'aliases' => [
+
+        'APIRoute'  => Dingo\Api\Facade\Route::class,
+        'API'       => Dingo\Api\Facade\API::class,
+        'Authorizer' => LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
 
         'App'       => Illuminate\Support\Facades\App::class,
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,

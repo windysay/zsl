@@ -2,7 +2,7 @@
 
 namespace App\Presenters;
 
-class ShopPresenter extends CommonPresenter
+class ShopsPresenter extends CommonPresenter
 {
     public function getHandle()
     {

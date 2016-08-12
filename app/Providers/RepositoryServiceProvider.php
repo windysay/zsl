@@ -39,6 +39,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->registerPermissionRepository();
         $this->registerShopRepository();
         $this->registerArticleCatRepository();
+        $this->registerArticleRepository();
     }
 
     /**
@@ -120,6 +121,17 @@ class RepositoryServiceProvider extends ServiceProvider
             $validator = $app['validator'];
 
             return new ArticleCatRepository($cat, $validator);
+        });
+    }
+
+    public function registerArticleRepository()
+    {
+        $this->app->singleton('articlerepository', function ($app) {
+            $model = config('repository.models.article');
+            $article = new $model();
+            $validator = $app['validator'];
+
+            return new ArticleCatRepository($article, $validator);
         });
     }
 }

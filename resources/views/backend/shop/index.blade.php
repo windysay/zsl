@@ -1,9 +1,9 @@
 @extends("backend.layout.main")
 
-@inject("shopPresenter","App\Presenters\ShopPresenter")
+@inject('actionPresenter','App\Presenters\ShopsPresenter')
 
 @section("content")
-    @include('backend.components.handle',$handle = $shopPresenter->getHandle())
+    @include('backend.components.handle',$handle = $actionPresenter->getHandle())
     <div class="row">
         <div class="col-md-12">
             <div class="box">

@@ -30,6 +30,8 @@ Route::resource('menu', 'MenuController');
 
 /* 文章栏目管理模块 */
 Route::resource('articlecat', 'ArticleCatController');
+/* 文章栏目管理 */
+Route::resource('article', 'ArticleController');
 
 /* 用户管理模块 */
 Route::resource("user", 'UserController');
