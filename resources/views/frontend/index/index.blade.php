@@ -6,25 +6,10 @@
     <title>RISE-Multipurpose Html Template</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
-
-    <!-- Bootstrap Css -->
-    <link href="/assets/frontend/bootstrap-assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Style -->
-    <link href="/assets/frontend/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="/assets/frontend/plugins/owl-carousel/owl.theme.css" rel="stylesheet">
-    <link href="/assets/frontend/plugins/owl-carousel/owl.transitions.css" rel="stylesheet">
-    <link href="/assets/frontend/plugins/Lightbox/dist/css/lightbox.css" rel="stylesheet">
-    <link href="/assets/frontend/plugins/Icons/et-line-font/style.css" rel="stylesheet">
-    <link href="/assets/frontend/plugins/animate.css/animate.css" rel="stylesheet">
-    <link href="/assets/frontend/css/main.css" rel="stylesheet">
-    <!-- Icons Font -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <meta name="description" content="CowCat is a Free, open-source CMS based on the Laravel PHP Framework">
+    <meta name="keywords" content="CowCat,奶牛猫,Laravel,CMS,Laravel CMS">
+    <meta name="author" content="Luis">
+    <link rel="stylesheet" href="{{elixir('assets/frontend/css/app.min.css')}}">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -459,19 +444,7 @@
         <h6>&copy; 2015 Rise.Development By BootstrapDev</h6>
     </div>
 </footer>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/assets/frontend/bootstrap-assets/js/bootstrap.min.js"></script>
-<script src="/assets/frontend/js/custom.js"></script>
-<!-- JS PLUGINS -->
-<script src="/assets/frontend/plugins/owl-carousel/owl.carousel.min.js"></script>
-<script src="/assets/frontend/js/jquery.easing.min.js"></script>
-<script src="/assets/frontend/plugins/countTo/jquery.countTo.js"></script>
-<script src="/assets/frontend/plugins/inview/jquery.inview.min.js"></script>
-<script src="/assets/frontend/plugins/Lightbox/dist/js/lightbox.min.js"></script>
-<script src="/assets/frontend/plugins/WOW/dist/wow.min.js"></script>
-<!-- GOOGLE MAP -->
+<script src="{{elixir("assets/frontend/js/app.min.js")}}"></script>
 </body>
 
 </html>
