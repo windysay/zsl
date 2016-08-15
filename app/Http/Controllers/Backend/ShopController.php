@@ -10,6 +10,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Form\ShopCreateForm;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 /**
  * 商会管理控制器
@@ -52,6 +53,7 @@ class ShopController extends Controller
         $data = [
             'cat_id'=>$request['cat_id'],
             'store_id'=>$request['store_id'],
+            'ispass'=>'1',
             'shop_name'=>$request['shop_name'],
             'shop_descript'=>$request['shop_descript'],
             'status'=>$request['status'],
@@ -81,7 +83,7 @@ class ShopController extends Controller
             $user_unique = User::where('email',$udata['email'])->first();
             /* 若是新用户创建用户 */
             if(!$user_unique) {
-                $user_unique = UserRepository::save($udata);
+                $user_unique = UserRepository::create($udata);
             }
             $data['user_id'] = $user_unique['id'];
             Shop::create($data);
@@ -177,5 +179,17 @@ class ShopController extends Controller
         catch (\Exception $e) {
             return $this->errorBackTo(['error' => $e->getMessage()]);
         }
+    }
+
+    //商户通过审核
+    public function pass(){
+        $id = Input::get('id');
+        if($id){
+            ShopRepository::saveById($id, ['ispass'=>1]);
+            return response()->json(['success' => 'true',]);
+        }else{
+            return response()->json(['success' => 'false',]);
+        }
+
     }
 }

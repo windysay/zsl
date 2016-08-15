@@ -22,9 +22,9 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="账号" name="email" value="{{old('email')}}">
+                        <input type="text" class="form-control" placeholder="账号" name="name" value="{{old('name')}}">
                         <span class="fa fa-user form-control-feedback"></span>
-                        @include('backend.layout.tip',['field'=>'email'])
+                        @include('backend.layout.tip',['field'=>'name'])
                     </div>
                 </div>
             </div>

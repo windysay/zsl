@@ -10,13 +10,9 @@ Route::get('/', [
 ]);
 
 /* 商会管理模块 */
-Route::get('shop/index', [
-    'as'   => 'backend.shop.index',
-    'uses' => 'ShopController@index',
-]);
-Route::get('shop/store', [
-    'as'   => 'backend.shop.store',
-    'uses' => 'ShopController@store',
+Route::post('shop/pass', [
+    'as'   => 'backend.shop.pass',
+    'uses' => 'ShopController@pass',
 ]);
 Route::resource('shop', 'ShopController');
 

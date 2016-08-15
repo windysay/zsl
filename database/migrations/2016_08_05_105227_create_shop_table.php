@@ -17,6 +17,7 @@ class CreateShopTable extends Migration
             $table->integer('user_id')->unsigned()->comment('申请用户id');
             $table->integer('cat_id')->unsigned()->comment('行业id');
             $table->integer('store_id')->unsigned()->comment('商号id');
+            $table->tinyInteger('ispass')->default(0)->comment('是否通过审核');
             $table->string('shop_name')->comment('商会名');
             $table->longText('shop_descript')->comment('描述');
             $table->string('parent_id')->comment('父类商会id');

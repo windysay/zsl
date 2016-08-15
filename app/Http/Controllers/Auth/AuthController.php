@@ -38,6 +38,13 @@ class AuthController extends Controller
      */
     protected $redirectAfterLogout = '/auth/login';
 
+    /**
+     * 设置$username属性来指定登录账号选项，该属性默认值是email
+     *
+     * @var string
+     */
+    protected $username = 'name';  //手机号码
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -88,7 +95,7 @@ class AuthController extends Controller
             $this->loginUsername() => 'required',
             'password'             => 'required',
         ], [
-            'email.required'    => '请输入用户邮箱',
+            'name.required'    => '请输入用户邮箱',
             'password.required' => '请输入用户密码',
         ]);
 
@@ -132,7 +139,7 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name'     => 'required|max:255',
-            'email'    => 'required|email|max:255|unique:users',
+//            'email'    => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -148,7 +155,7 @@ class AuthController extends Controller
     {
         return User::create([
             'name'     => $data['name'],
-            'email'    => $data['email'],
+//            'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }
