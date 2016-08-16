@@ -1,21 +1,18 @@
 <?php
-
-namespace App\Repositories;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Auth;
 
-class Verifier
+class PasswordGrantVerifier
 {
-
     public function verify($username, $password)
     {
         $credentials = [
-            'email'    => $username,
+            'name'    => $username,
             'password' => $password,
         ];
 
-        if (Auth::once($credentials))
-        {
+        if (Auth::once($credentials)) {
             return Auth::user()->id;
         }
 

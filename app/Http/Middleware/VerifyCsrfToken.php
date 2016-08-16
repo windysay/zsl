@@ -7,11 +7,11 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 class VerifyCsrfToken extends BaseVerifier
 {
     /**
-     * The URIs that should be excluded from CSRF verification.
+     * 设置不需要csrf校验的路由
      *
      * @var array
      */
     protected $except = [
-        //
+        'oauth/access_token'
     ];
 }

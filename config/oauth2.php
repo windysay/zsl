@@ -33,7 +33,7 @@ return [
             'access_token_ttl' => 604800,
 
             // the code to run in order to verify the user's identity
-            'callback'         => '\App\Repositories\Verifier@verify'
+            'callback'         => '\App\Http\Controllers\Auth\PasswordGrantVerifier@verify',
         ],
         'refresh_token' => [
             'class'                 => 'League\OAuth2\Server\Grant\RefreshTokenGrant',
