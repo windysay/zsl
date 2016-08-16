@@ -9,6 +9,7 @@ return [
         'shop'       => 'App\Models\Shop',
         'articlecat' => 'App\Models\ArticleCat',
         'article'    => 'App\Models\Article',
+        'user-profile' => 'App\Models\UserProfile',
     ],
     'page-limit' => 10,
 ];
