@@ -38,6 +38,14 @@ Route::resource('article', 'ArticleController');
 
 /* 用户管理模块 */
 Route::resource("user", 'UserController');
+Route::get('user/profile/{id}', [
+    'as'   => 'backend.user.profile',
+    'uses' => 'UserController@profile',
+]);
+Route::post('user/update-profile', [
+    'as'   => 'backend.user.update-profile',
+    'uses' => 'UserController@updateProfile',
+]);
 
 /* 角色管理模块 */
 Route::get('role/permission/{id}', [
