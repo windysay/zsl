@@ -27,7 +27,8 @@ class MenuCreateForm extends Request
             'name'        => 'required',
             'parent_id'   => 'required',
             'description' => 'required',
-            'route'       => 'required',//|unique:menus
+            'route'       => 'required|unique:menus,route,' . $this->get('id'),
+
         ];
     }
 

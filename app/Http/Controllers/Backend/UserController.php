@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Facades\UserProfileRepository;
 use Auth;
 use Illuminate\Http\Request;
 use App\Facades\RoleRepository;
 use App\Facades\UserRepository;
+use App\Facades\UserProfileRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Form\UserCreateForm;
@@ -183,9 +183,10 @@ class UserController extends Controller
      */
     public function profile($id)
     {
-        $user = UserRepository::find($id);
+        $user = UserRepository::getUserProfileById($id);
+        $color = ['label-danger', 'label-success', 'label-info', 'label-warning', 'label-primary', 'label-black'];
 
-        return view('backend.user.profile', compact('user', 'id'));
+        return view('backend.user.profile', compact('user', 'id', 'color'));
     }
 
     /**
@@ -218,5 +219,10 @@ class UserController extends Controller
         catch (\Exception $e) {
             return $this->errorBackTo(['error' => $e->getMessage()]);
         }
+    }
+
+    public function uploadAvatar(Request $request)
+    {
+        dump($request->all());
     }
 }

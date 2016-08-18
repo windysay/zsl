@@ -46,6 +46,10 @@ Route::post('user/update-profile', [
     'as'   => 'backend.user.update-profile',
     'uses' => 'UserController@updateProfile',
 ]);
+Route::post('user/upload-avatar', [
+    'as'   => 'backend.user.upload-avatar',
+    'uses' => 'UserController@uploadAvatar',
+]);
 
 /* 角色管理模块 */
 Route::get('role/permission/{id}', [
@@ -84,6 +88,10 @@ Route::get('file', [
 Route::post('file/upload', [
     'as'   => 'backend.file.upload',
     'uses' => 'FileController@upload',
+]);
+Route::get('file/download/{id}', [
+    'as'   => 'backend.file.download',
+    'uses' => 'FileController@download',
 ]);
 
 /* 发送测试文字邮件 */
