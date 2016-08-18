@@ -29,6 +29,17 @@ Route::group([
 
 //获取API access_token
 Route::post('oauth/access_token', function() {
-    return Response::json(Authorizer::issueAccessToken());
+    $name = Input::get('username');
+    $redis = Redis::connection('default');
+    $access_token = $redis->get('oauthAccessToken'.$name);  //格式: oauthAccessToken13794311355
+    if(!$access_token){  //重新获取accessToken写到缓存
+        $access_token = Authorizer::issueAccessToken()['access_token'];
+        $redis->setex('oauthAccessToken'.$name, 7*24*3600,$access_token); //设置7天过期时间
+    }
+    $data['access_token'] = $access_token;
+    $json['message'] = '获取AccessToken成功';
+    $json['status_code'] = 200;
+    $json['data'] = $data;
+    return Response::json($json);
 });
 

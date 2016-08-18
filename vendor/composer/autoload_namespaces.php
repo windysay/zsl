@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'phpDocumentor' => array($vendorDir . '/phpdocumentor/reflection-docblock/src'),
+    'Toplan\\Sms' => array($vendorDir . '/toplan/laravel-sms/src'),
     'System' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),

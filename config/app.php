@@ -159,8 +159,11 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
         LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
-        //Ueditor 百度富文本编辑器
+        /* Ueditor 百度富文本编辑器 */
         Stevenyangecho\UEditor\UEditorServiceProvider::class,
+        /* SMS短信 */
+        Toplan\PhpSms\PhpSmsServiceProvider::class,
+        Toplan\Sms\SmsManagerServiceProvider::class,
     ],
 
     /*
@@ -175,6 +178,9 @@ return [
     */
 
     'aliases' => [
+
+        'PhpSms' => Toplan\PhpSms\Facades\Sms::class,
+        'SmsManager' => Toplan\Sms\Facades\SmsManager::class,
 
         'APIRoute'  => Dingo\Api\Facade\Route::class,
         'API'       => Dingo\Api\Facade\API::class,

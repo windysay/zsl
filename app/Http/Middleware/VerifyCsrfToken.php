@@ -13,6 +13,9 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         'oauth/access_token',
-        'api/login'
+        'oauth/access_token_php',
+        'api/login',
+        'api/signup',
+        'api/sendCode',
     ];
 }

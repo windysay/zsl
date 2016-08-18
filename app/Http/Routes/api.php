@@ -10,5 +10,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API','middleware' => '
 /** 不需要身份验证 */
 $api->version('v1', ['namespace' => 'App\Http\Controllers\API'], function ($api) {
     $api->post('login', 'AuthController@login');
+    $api->post('signup', 'AuthController@signup');
+    $api->post('sendCode', 'SmsController@sendCode');
 });
 
