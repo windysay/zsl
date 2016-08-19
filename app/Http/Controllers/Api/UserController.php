@@ -18,7 +18,7 @@ class UserController extends BaseController
     {
         $data = UserRepository::paginate(10);
 
-        $json['message'] = '我的个人资料';
+        $json['message'] = '用户列表';
         $json['status_code'] = 200;
         $json['data'] = $data;
         return $json;

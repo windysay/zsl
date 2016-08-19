@@ -70,16 +70,16 @@ class AuthController extends BaseController
             $type = Input::get('type');
             $password = trim(Input::get('password'));
             $verifyPassword = Input::get('verifyPassword');
+            /** 判断用户是否注册 */
+            $user = User::where(['name'=>$mobile])->count();
+            if($user>0){
+                throw new \LogicException('该手机号码已注册',1009);
+            }
             /** 校验验证码 */
             Sms::verifyCode($mobile, $code, $type);
 
             if($password!=$verifyPassword){
                 throw new \LogicException('两次输入的密码不一致',1008);
-            }
-            /** 判断用户是否注册 */
-            $user = User::where(['name'=>$mobile])->count();
-            if($user>0){
-                throw new \LogicException('该手机号码已注册',1009);
             }
             /** 用户注册 */
             $udata = [
