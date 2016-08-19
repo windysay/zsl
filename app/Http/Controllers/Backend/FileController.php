@@ -57,6 +57,13 @@ class FileController extends Controller
         }
     }
 
+    /**
+     * 下载文件
+     *
+     * @param $id
+     *
+     * @return $this|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
     public function download($id)
     {
         $file = FileModel::find($id);
@@ -72,8 +79,30 @@ class FileController extends Controller
         }
     }
 
-    public function destroy(Request $request)
+    /**
+     * 删除文件
+     *
+     * @param $id
+     *
+     * @return $this|mixed
+     */
+    public function destroy($id)
     {
+        $file = FileModel::find($id);
+        if( ! $file->exists){
+            return $this->errorBackTo("文件已删除,请刷新页面");
+        }
 
+        try {
+            if(FileModel::destroy($id)){
+
+                return $this->successBackTo('删除文件成功');
+            } else {
+                throw new \Exception("删除文件失败");
+            }
+        }
+        catch (\Exception $e) {
+            return $this->errorBackTo(['error' => $e->getMessage()]);
+        }
     }
 }

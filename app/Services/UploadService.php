@@ -71,7 +71,8 @@ class UploadService
             $info['extension'] = $this->file->getClientOriginalExtension();
             $info['original_name'] = $this->file->getClientOriginalName();
             if($this->driver == 'local'){
-                $info['url'] = './uploads/' . $savePath;
+                $info['url'] = '/uploads/' . $savePath;
+                $info['location'] = 1;
             }
 
             return ['message' => '上传文件成功', 'status' => 1, 'data' => $info];
