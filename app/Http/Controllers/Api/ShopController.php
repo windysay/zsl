@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Facades\ShopRepository;
 use App\Http\Controllers\BaseController;
 use Dingo\Api\Exception\StoreResourceFailedException;
-use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -24,25 +22,24 @@ class ShopController extends BaseController
     public function joinUnionApply(){
         try{
             $request = Input::get();
+            $rules = [
+                'shop_name' => ['required'],
+                'user_name' => ['required'],
+                'user_mobile' => ['required'],
+                'user_id' => ['required'],
+            ];
 
-            if(empty($request['shop_name'])){
-                throw new \LogicException('企业名称不能为空！',1006);
-            }
-            if(empty($request['user_name'])){
-                throw new \LogicException('联系人不能为空！',1006);
-            }
-            if(empty($request['user_mobile'])){
-                throw new \LogicException('联系方式不能为空',1007);
-            }
-            if(empty($request['user_id'])){
-                throw new \LogicException('用户ID不能为空',1008);
+            $validator = app('validator')->make($request, $rules);
+
+            if ($validator->fails()) {
+                throw new StoreResourceFailedException('申请提交失败.', $validator->errors());
             }
 
             $request['ispartner'] = 1;
             unset($request['access_token']);
 
             if(ShopRepository::create($request)){
-                $message = '已提交申请,工作人员会尽快给您答复';
+                $message = '申请已提交,工作人员会尽快给您答复';
                 /** 发送邮件通知管理员 */
             }else{
                 throw new \LogicException('网络出错,请检查网络连接',302);
@@ -105,6 +102,7 @@ class ShopController extends BaseController
         $area_code = Input::get('area_code');
         $map['parent_id'] = 0;//不显示成员企业
         $map['ispass'] = 1;   //只显示已审核
+        $map['status'] = 'active';
         if($cat_id) $map['cat_id'] = $cat_id;
         if($store_id) $map['store_id'] = $store_id;
         if($keyword) $map['shop_name'] = ['like', '%'.$keyword.'%'];
@@ -126,6 +124,7 @@ class ShopController extends BaseController
         $map['ispartner'] = 1;  //联盟商会成员
         $map['parent_id'] = 0;  //不显示成员企业
         $map['ispass'] = 1;     //只显示已审核
+        $map['status'] = 'active';
         if($cat_id) $map['cat_id'] = $cat_id;
         if($store_id) $map['store_id'] = $store_id;
         if($keyword) $map['shop_name'] = ['like', '%'.$keyword.'%'];
@@ -143,11 +142,29 @@ class ShopController extends BaseController
         $parent_id = Input::get('parent_id');
         $map['parent_id'] = $parent_id; //显示成员企业
         $map['ispass'] = 1;             //只显示已审核
+        $map['status'] = 'active';
         $shopList = ShopRepository::paginateWhere($map, config('repository.page-limit'), ['id','shop_name','addr_code','addr','shop_tel','shop_logo']);
         $json['message'] = '获取成员企业列表成功';
         $json['status_code'] = 200;
         $json['data'] = $shopList;
         return $json;
+    }
+
+    /** 获取商会成员 */
+    public function getShopDetail(){
+        $id = Input::get('id');
+        $data = ShopRepository::find($id, ['shop_name','shop_descript','addr_code','addr','shop_tel','shop_logo','shop_email','shop_url','lng','lat','shop_qrcode']);
+        if($data){
+            $json['message'] = '获取商会详情成功';
+            $json['status_code'] = 200;
+            $json['data'] = $data;
+            return $json;
+        }else{
+            $json['message'] = '不存在该商会';
+            $json['status_code'] = 400;
+            $json['data'] = null;
+            return $json;
+        }
     }
 
     public function getShopStore(){

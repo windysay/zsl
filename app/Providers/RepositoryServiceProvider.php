@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Repositories\ArticleCatRepository;
+use App\Repositories\GoodsRepository;
 use App\Repositories\ShopRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\UserProfileRepository;
@@ -42,6 +43,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->registerArticleCatRepository();
         $this->registerArticleRepository();
         $this->registerUserProfileRepository();
+        $this->registerGoodsRepository();
     }
 
     /**
@@ -137,7 +139,6 @@ class RepositoryServiceProvider extends ServiceProvider
         });
     }
 
-
     public function registerUserProfileRepository()
     {
         $this->app->singleton('userprofilerepository', function ($app) {
@@ -149,4 +150,17 @@ class RepositoryServiceProvider extends ServiceProvider
 
         });
     }
+
+    public function registerGoodsRepository()
+    {
+        $this->app->singleton('goodsrepository', function ($app) {
+            $model = config('repository.models.goods');
+            $permission = new $model();
+            $validator = $app['validator'];
+
+            return new GoodsRepository($permission, $validator);
+
+        });
+    }
+
 }

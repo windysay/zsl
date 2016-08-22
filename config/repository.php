@@ -10,6 +10,7 @@ return [
         'articlecat' => 'App\Models\ArticleCat',
         'article'    => 'App\Models\Article',
         'user-profile' => 'App\Models\UserProfile',
+        'goods'      => 'App\Models\Goods',
     ],
     'page-limit' => 10,
 ];
