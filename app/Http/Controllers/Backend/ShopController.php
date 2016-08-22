@@ -38,7 +38,7 @@ class ShopController extends Controller
      */
     public function create()
     {
-        return view("backend.shop.create", compact('shopCat','shopStore'));
+        return view("backend.shop.create");
     }
 
     /**

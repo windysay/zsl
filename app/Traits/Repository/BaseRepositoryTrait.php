@@ -119,7 +119,7 @@ trait BaseRepositoryTrait
             return $model->update($data);
         }
         catch (\Exception $e) {
-            dump($e->getMessage());
+            print_r($e->getMessage());
             exit;
         }
     }
@@ -166,7 +166,7 @@ trait BaseRepositoryTrait
             return $model->first($columns);
         }
         catch (\Exception $e) {
-            dump($e->getMessage());
+            print_r($e->getMessage());
             exit;
         }
     }
@@ -209,11 +209,10 @@ trait BaseRepositoryTrait
                     }
                 }
             }
-
             return $model->get($columns);
         }
         catch (\Exception $e) {
-            dump($e->getMessage());
+            print_r($e->getMessage());
             exit;
         }
     }
@@ -274,7 +273,7 @@ trait BaseRepositoryTrait
             return $model->paginate($limit, $columns);
         }
         catch (\Exception $e) {
-            dump($e->getMessage());
+            print_r($e->getMessage());
             exit;
         }
     }
