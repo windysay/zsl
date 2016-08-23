@@ -11,6 +11,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API','middleware' => '
     $api->post('shop/yellowPageApply', 'ShopController@yellowPageApply');
     //供需申请
     $api->post('goods/create', 'GoodsController@create');
+    //修改手机号码
+    $api->post('auth/changeMobile','AuthController@changeMobile');
 });
 
 /** 不需要身份验证 */

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Facades\UserRepository;
 use App\Http\Controllers\BaseController;
 use App\Models\User;
+use Dingo\Api\Exception\StoreResourceFailedException;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -20,15 +21,22 @@ use App\Http\Controllers\Api\SmsController as Sms;
  */
 class AuthController extends BaseController
 {
+    /**
+     * 登录 手动认证用户
+     * @return mixed
+     */
     public function login(){
         try{
             $request = Input::get();
-            if(empty($request['name'])){
-                throw new \LogicException('登陆用户名不能为空！',1006);
-            }
+            $rules = [
+                'name' => ['required'],
+                'password' => ['required'],
+            ];
 
-            if(empty($request['password'])){
-                throw new \LogicException('登陆密码不能为空',1007);
+            $validator = app('validator')->make($request, $rules);
+
+            if ($validator->fails()) {
+                throw new StoreResourceFailedException('提交失败.', $validator->errors());
             }
 
             if(Auth::attempt(['name'=>$request['name'],'password'=>$request['password']], true)){
@@ -55,32 +63,47 @@ class AuthController extends BaseController
             $json['message'] = $e->getMessage();
             $json['status_code'] = $e->getCode();
             $json['data'] = null;
-            return Response::json($json);
+            return $json;
         }
         $json['message'] = $message;
         $json['status_code'] = 200;
         $json['data'] = $data;
-        return Response::json($json);
+        return $json;
     }
 
+    /**
+     * 注册
+     * type 类型形式(注册[signup]、找回密码[forgot]、重置手机号[reset])
+     * @return mixed
+     */
     public function signup(){
         try{
-            $mobile = trim(Input::get('mobile'));
+            $mobile = trim(Input::get('name'));
             $code = Input::get('code');
-            $type = Input::get('type');
+            $type = 'signup';
             $password = trim(Input::get('password'));
-            $verifyPassword = Input::get('verifyPassword');
-            /** 判断用户是否注册 */
-            $user = User::where(['name'=>$mobile])->count();
-            if($user>0){
-                throw new \LogicException('该手机号码已注册',1009);
-            }
+
             /** 校验验证码 */
             Sms::verifyCode($mobile, $code, $type);
 
-            if($password!=$verifyPassword){
-                throw new \LogicException('两次输入的密码不一致',1008);
+            $rules = [
+                'name' => ['required','unique:users'],
+                'code' => ['required'],
+                //confirmed 必须和输入数据里的 password_confirmation 的值保持一致。
+                'password' => ['required','min:6','confirmed'],
+                'password_confirmation' => ['required','min:6'],
+            ];
+
+            $validator = app('validator')->make(Input::get(), $rules);
+
+            if ($validator->fails()) {
+                throw new StoreResourceFailedException('提交失败.', $validator->errors());
             }
+
+            if(!preg_match("/^1[34578]{1}[0-9]{9}$/",$mobile)){
+                throw new \LogicException('手机号码不正确',1006);
+            }
+
             /** 用户注册 */
             $udata = [
                 'name'=>$mobile,
@@ -90,15 +113,65 @@ class AuthController extends BaseController
             ];
             $data = UserRepository::create($udata);
 
+            if($data) {
+                //登录
+                Auth::attempt(['name'=>$mobile,'password'=>$password], true);
+            }
+
         }catch (\LogicException $e){
             $json['message'] = $e->getMessage();
             $json['status_code'] = $e->getCode();
             $json['data'] = null;
-            return Response::json($json);
+            return $json;
         }
-        $json['message'] = '注册成功';
+        $json['message'] = '注册并登录成功';
         $json['status_code'] = 200;
         $json['data'] = $data;
-        return Response::json($json);
+        return $json;
+    }
+
+    /**
+     * 修改手机号码 需要先发送短信验证码
+     * type 类型形式(注册[signup]、找回密码[forgot]、重置手机号[reset])
+     * @return mixed
+     */
+    public function changeMobile(){
+        try{
+            $mobile = trim(Input::get('name'));
+            $code = Input::get('code');
+            $type = 'reset';
+
+            $rules = [
+                'name' => ['required'],
+                'code' => ['required'],
+                //'password' => ['required','min:6'],
+            ];
+
+            $validator = app('validator')->make(Input::get(), $rules);
+
+            if ($validator->fails()) {
+                throw new StoreResourceFailedException('提交失败.', $validator->errors());
+            }
+
+            if(!preg_match("/^1[34578]{1}[0-9]{9}$/",$mobile)){
+                throw new \LogicException('手机号码不正确',1006);
+            }
+
+            /** 校验验证码 */
+            Sms::verifyCode($mobile, $code, $type);
+
+            UserRepository::saveById(Auth::id(), ['name'=>$mobile]);
+
+        }catch (\LogicException $e){
+            $json['message'] = $e->getMessage();
+            $json['status_code'] = $e->getCode();
+            $json['data'] = null;
+            return $json;
+        }
+        $json['message'] = '手机号码修改成功';
+        $json['status_code'] = 200;
+        $json['data'] = null;
+        return $json;
+
     }
 }

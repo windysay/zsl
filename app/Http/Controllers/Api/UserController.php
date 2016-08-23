@@ -6,7 +6,6 @@ use App\Facades\UserRepository;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Input;
 
 /**
  * 用户管理控制器

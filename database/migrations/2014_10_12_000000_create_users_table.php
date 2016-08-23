@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->integer('points')->default(0);  //积分
+            $table->string('avatar')->nullable();  //头像
+            $table->string('sex')->default('男');  //头像
             $table->tinyInteger('is_super_admin');
             $table->rememberToken();
             $table->timestamps();

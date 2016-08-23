@@ -109,7 +109,7 @@ return [
     */
 
     'attributes'           => [
-        'name'                  => '名称',
+        'name'                  => '用户',
         'student_id'            => '考生号',
         'username'              => '用户名',
         'email'                 => '邮箱',
