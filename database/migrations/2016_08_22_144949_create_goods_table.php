@@ -20,6 +20,7 @@ class CreateGoodsTable extends Migration
             $table->string('title');
             $table->text('introduct');
             $table->text('descript')->nullable();
+            $table->text('images')->nullable();
             $table->string('user_name');
             $table->string('user_mobile');
             $table->string('user_email')->nullable();

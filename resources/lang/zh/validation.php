@@ -139,6 +139,10 @@ return [
         'time'                  => '时间',
         'available'             => '可用的',
         'size'                  => '大小',
+        'introduct'             => '简介',
+        'user_name'             => '联系人名字',
+        'user_mobile'           => '联系方式',
+        'type'                  => '类型',
     ],
 
 ];

@@ -6,7 +6,7 @@ Route::get('language/{locale}', function ($locale) {
     return redirect()->route('backend.index.index');
 });
 
-/* 后台首页 */
+/** 后台首页 */
 Route::get('index/', [
     'as'   => 'backend.index.index',
     'uses' => 'IndexController@index',
@@ -16,14 +16,14 @@ Route::get('/', [
     'uses' => 'IndexController@index',
 ]);
 
-/* 商会管理模块 */
+/** 商会管理模块 */
 Route::post('shop/pass', [
     'as'   => 'backend.shop.pass',
     'uses' => 'ShopController@pass',
 ]);
 Route::resource('shop', 'ShopController');
 
-/* 菜单管理模块 */
+/** 菜单管理模块 */
 Route::get('menu/search', [
     'as'         => 'backend.menu.search',
     'uses'       => 'MenuController@search',
@@ -31,10 +31,16 @@ Route::get('menu/search', [
 ]);
 Route::resource('menu', 'MenuController');
 
-/* 文章栏目管理模块 */
+/** 文章栏目管理模块 */
 Route::resource('articlecat', 'ArticleCatController');
-/* 文章栏目管理 */
+/** 文章栏目管理模块 */
 Route::resource('article', 'ArticleController');
+/** 供需信息管理模块 */
+Route::post('goods/pass', [
+    'as'   => 'backend.goods.pass',
+    'uses' => 'GoodsController@pass',
+]);
+Route::resource('goods', 'GoodsController');
 
 /* 用户管理模块 */
 Route::resource("user", 'UserController');

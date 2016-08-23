@@ -7,6 +7,8 @@ use App\Http\Controllers\BaseController;
 use Dingo\Api\Exception\StoreResourceFailedException;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 /**
  * 供需发布管理控制器
@@ -22,6 +24,7 @@ class GoodsController extends BaseController
                 'title' => ['required'],
                 'introduct' => ['required'],
                 'user_name' => ['required'],
+                'images' => ['required'],
                 'type' => ['required'],
                 'user_email' => ['email'],
                 'user_mobile' => ['required'],
@@ -34,7 +37,7 @@ class GoodsController extends BaseController
             }
             $request['user_id'] = Auth::id();
             unset($request['access_token']);
-            print_r($request);die;
+            //print_r($request);die;
             if(GoodsRepository::create($request)){
                 $message = '申请已提交,工作人员会尽快给您审核';
                 /** 发送邮件通知管理员 */
@@ -72,9 +75,9 @@ class GoodsController extends BaseController
         return $json;
     }
 
-    public function detail($id)
+    public function detail()
     {
-        $data = GoodsRepository::find($id);
+        $data = GoodsRepository::find(Input::get('id'));
 
         if($data){
             $json['message'] = '供需详情获取成功';

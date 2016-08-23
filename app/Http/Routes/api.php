@@ -4,7 +4,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', ['namespace' => 'App\Http\Controllers\API','middleware' => 'api.auth'], function ($api) {
     $api->get('user', 'UserController@index');
-    $api->get('user/{id}', 'UserController@show');
+    $api->post('user/detail', 'UserController@show');
     //加盟申请
     $api->post('shop/joinUnionApply', 'ShopController@joinUnionApply');
     //加入黄页申请
@@ -31,8 +31,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API'], function ($api)
     //商会类型
     $api->get('shop/cat', 'ShopController@getStopCat');
     //供需列表
-    $api->get('goods/getList', 'GoodsController@getList');
+    $api->post('goods/getList', 'GoodsController@getList');
     //供需详情
-    $api->get('goods/detail', 'GoodsController@detail');
+    $api->post('goods/detail', 'GoodsController@detail');
 });
 

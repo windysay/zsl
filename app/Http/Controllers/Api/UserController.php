@@ -6,6 +6,7 @@ use App\Facades\UserRepository;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
 
 /**
  * 用户管理控制器
@@ -24,9 +25,9 @@ class UserController extends BaseController
         return $json;
     }
 
-    public function show($id)
+    public function show()
     {
-        $data = UserRepository::find($id);
+        $data = UserRepository::find(Input::get('id'));
 
         $json['message'] = '我的个人资料';
         $json['status_code'] = 200;
