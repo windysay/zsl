@@ -4,7 +4,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', ['namespace' => 'App\Http\Controllers\API','middleware' => 'api.auth'], function ($api) {
     $api->get('user', 'UserController@index');
-    $api->post('user/detail', 'UserController@show');
+    $api->post('user/info', 'UserController@info');
     //加盟申请
     $api->post('shop/joinUnionApply', 'ShopController@joinUnionApply');
     //加入黄页申请
@@ -13,12 +13,19 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API','middleware' => '
     $api->post('goods/create', 'GoodsController@create');
     //修改手机号码
     $api->post('auth/changeMobile','AuthController@changeMobile');
+    //修改头像
+    $api->post('user/changeAvatar','UserController@changeAvatar');
 });
 
 /** 不需要身份验证 */
 $api->version('v1', ['namespace' => 'App\Http\Controllers\API'], function ($api) {
+    //登录
     $api->post('login', 'AuthController@login');
+    //注册
     $api->post('signup', 'AuthController@signup');
+    //修改/忘记密码
+    $api->post('auth/changePassword', 'AuthController@changePassword');
+    //发送短信验证码
     $api->post('sendCode', 'SmsController@sendCode');
     //获取黄页列表
     $api->post('shop/getYellowPage', 'ShopController@getYellowPage');

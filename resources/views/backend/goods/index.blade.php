@@ -1,6 +1,6 @@
 @extends("backend.layout.main")
 
-@inject('actionPresenter','App\Presenters\GoodsPresenter')
+{{--@inject('actionPresenter','App\Presenters\GoodsPresenter')--}}
 
 @section("content")
     {{--@include('backend.components.handle',$handle = $actionPresenter->getHandle())--}}

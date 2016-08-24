@@ -131,7 +131,7 @@ class AuthController extends BaseController
     }
 
     /**
-     * 修改手机号码 需要先发送短信验证码
+     * 修改手机号码 需要先发送短信验证码 type为reset
      * type 类型形式(注册[signup]、找回密码[forgot]、重置手机号[reset])
      * @return mixed
      */
@@ -169,6 +169,54 @@ class AuthController extends BaseController
             return $json;
         }
         $json['message'] = '手机号码修改成功';
+        $json['status_code'] = 200;
+        $json['data'] = null;
+        return $json;
+
+    }
+
+    /**
+     * 修改/找回手机密码 需要先发送短信验证码 type为forgot
+     * type 类型形式(注册[signup]、找回密码[forgot]、重置手机号[reset])
+     * @return mixed
+     */
+    public function changePassword(){
+        try{
+            $user_id = Input::get('user_id');
+            $mobile = trim(Input::get('name'));
+            $code = Input::get('code');
+            $type = 'forgot';
+            $password = Input::get('password');
+
+            $rules = [
+                'name' => ['required'],
+                'code' => ['required'],
+                'password' => ['required','min:6','confirmed'],
+                'password_confirmation' => ['required','min:6'],
+            ];
+
+            $validator = app('validator')->make(Input::get(), $rules);
+
+            if ($validator->fails()) {
+                throw new StoreResourceFailedException('提交失败.', $validator->errors());
+            }
+
+            if(!preg_match("/^1[34578]{1}[0-9]{9}$/",$mobile)){
+                throw new \LogicException('手机号码不正确',1006);
+            }
+
+            /** 校验验证码 */
+            Sms::verifyCode($mobile, $code, $type);
+
+            UserRepository::saveById($user_id, ['password'=>bcrypt($password)]);
+
+        }catch (\LogicException $e){
+            $json['message'] = $e->getMessage();
+            $json['status_code'] = $e->getCode();
+            $json['data'] = null;
+            return $json;
+        }
+        $json['message'] = '密码修改成功';
         $json['status_code'] = 200;
         $json['data'] = null;
         return $json;
