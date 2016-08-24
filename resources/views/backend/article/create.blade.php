@@ -1,6 +1,5 @@
 @extends('backend.layout.main')
 @section('content')
-    @include('UEditor::head')
     <div class="row">
         <div class="col-md-12">
             <form method="post" action="{{route('backend.article.store')}}">
@@ -26,7 +25,13 @@
                         </div>
                         <div class="form-group">
                             <label for="logo">文章logo</label>
-                            <input type="file" class="form-control" id="logo" name="logo" value="{{old('logo')}}">
+                            <input type="file" class="form-control" id="file" name="file">
+                            <input type="hidden" id="image" name="logo" value="{{old('logo') or ''}}">
+                            @if(!empty(old('logo')))
+                                <img src="{{old('logo')}}" alt="{{old('title')}}" id="preview" style="margin-top: 10px;border-radius: 10px;max-height:100px;">
+                            @else
+                                <img src="" alt="" id="preview" style="margin-top: 10px;border-radius: 10px;max-height:100px;">
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="type">文章是否发布</label>
@@ -50,8 +55,8 @@
                         <div class="form-group">
                             <label for="name">文章内容</label>
                             <!-- 加载编辑器的容器 -->
-                            <script id="container" name="content" type="text/plain">
-                            </script>
+                            @include('UEditor::head')
+                            <script id="container" name="content" type="text/plain">{!! old('content') !!}</script>
                             <!-- 实例化编辑器 -->
                             <script type="text/javascript">
                                 var ue = UE.getEditor('container',{
@@ -76,5 +81,32 @@
             </form>
         </div>
     </div>
+@endsection
+@section('after.js')
+    <script type="text/javascript">
+        $(function () {
+            $('#file').on('change', function () {
+                var formdata = new FormData();  //构建空的formdata对象(HTML5)
+                formdata.append("file", $("#file")[0].files[0]); //增加上传文件
+                $.ajax({
+                    url: '{{route("backend.user.upload-avatar")}}',
+                    type: 'POST',
+                    cache: false,
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN':'{{csrf_token()}}'
+                    },
+                }).done(function (response) {
+                    var url = response.data.url;
+                    $('#image').attr('value', url);
+                    $('#preview').attr('src', url);
+                }).fail(function (response) {
+                    console.log(response);
+                });
+            });
+        });
+    </script>
 @endsection
 

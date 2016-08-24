@@ -23,7 +23,7 @@ class ArticleController extends Controller
     public function index()
     {
         $data = ArticleRepository::paginate(config('repository.page-limit'));
-        $cat = ArticleCatRepository::all()->toArray();
+        $cat = create_articlecat_list(ArticleCatRepository::all()->toArray());
         $type = ['article'=>'文章','url'=>'网页链接','video'=>'视频'];
 
         return view('backend.article.index', compact("data", "cat", "type"));
@@ -51,7 +51,8 @@ class ArticleController extends Controller
     public function store(ArticleCreateForm $request)
     {
         try {
-            if (ArticleRepository::create($request->all())) {
+            $data = $request->except(['_token', 'file']);
+            if (ArticleRepository::create($data)) {
                 return $this->successRoutTo("backend.article.index", "新增文章成功");
             }
         }

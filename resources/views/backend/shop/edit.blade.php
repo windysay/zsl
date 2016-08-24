@@ -34,7 +34,27 @@
                             </div>
                             <div class="form-group">
                                 <label for="shop_descript">描述</label>
-                                <textarea class="form-control" id="shop_descript" name="shop_descript" placeholder="描述">{{$shop->shop_descript}}</textarea>
+                                <!-- 加载编辑器的容器 -->
+                                @include('UEditor::head')
+                                <script id="container" name="shop_descript" type="text/plain">{!! $shop->shop_descript !!}</script>
+                                <!-- 实例化编辑器 -->
+                                <script type="text/javascript">
+                                    var ue = UE.getEditor('container',{
+                                    });
+                                    ue.ready(function() {
+                                        ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');//此处为支持laravel5 csrf ,根据实际情况修改,目的就是设置 _token 值.
+                                    });
+                                </script>
+                            </div>
+                            <div class="form-group">
+                                <label for="shop_qrcode">商会logo</label>
+                                <input type="file" class="form-control" id="file" name="file">
+                                <input type="hidden" id="image" name="shop_logo" value="{{$shop->shop_logo or ''}}">
+                                @if(!empty($shop->shop_logo))
+                                    <img src="{{$shop->shop_logo}}" alt="{{$shop->shop_name}}" id="preview" style="margin-top: 10px;border-radius: 10px;max-height:100px;">
+                                @else
+                                    <img src="" alt="" id="preview" style="margin-top: 10px;border-radius: 10px;max-height:100px;">
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label>商户状态</label>
@@ -60,8 +80,14 @@
                                 <input type="text" class="form-control" id="shop_url" name="shop_url" placeholder="官网网址" value="{{$shop->shop_url}}">
                             </div>
                             <div class="form-group">
-                                <label for="shop_qrcode">二维码</label>
-                                <input type="text" class="form-control" id="shop_qrcode" name="shop_qrcode" placeholder="二维码" value="{{$shop->shop_qrcode}}">
+                                <label for="shop_qrcode">微信二维码</label>
+                                <input type="file" class="form-control" id="file1" name="file">
+                                <input type="hidden" id="image" name="shop_qrcode" value="{{$shop->shop_qrcode or ''}}">
+                                @if(!empty($shop->shop_qrcode))
+                                    <img src="{{$shop->shop_qrcode}}" alt="{{$shop->shop_name}}" id="preview" style="margin-top: 10px;border-radius: 10px;max-height:100px;">
+                                @else
+                                    <img src="" alt="" id="preview" style="margin-top: 10px;border-radius: 10px;max-height:100px;">
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="lng">经度</label>
@@ -87,5 +113,55 @@
             </form>
         </div>
     </div>
+@endsection
+@section('after.js')
+    <script type="text/javascript">
+        $(function () {
+            $('#file').on('change', function () {
+                fileObj = $(this);
+                var formdata = new FormData();  //构建空的formdata对象(HTML5)
+                formdata.append("file", fileObj[0].files[0]); //增加上传文件
+                $.ajax({
+                    url: '{{route("backend.user.upload-avatar")}}',
+                    type: 'POST',
+                    cache: false,
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN':'{{csrf_token()}}'
+                    },
+                }).done(function (response) {
+                    var url = response.data.url;
+                    fileObj.parent().find('#image').attr('value', url);
+                    fileObj.parent().find('#preview').attr('src', url);
+                }).fail(function (response) {
+                    console.log(response);
+                });
+            });
+            $('#file1').on('change', function () {
+                fileObj = $(this);
+                var formdata = new FormData();  //构建空的formdata对象(HTML5)
+                formdata.append("file", fileObj[0].files[0]); //增加上传文件
+                $.ajax({
+                    url: '{{route("backend.user.upload-avatar")}}',
+                    type: 'POST',
+                    cache: false,
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN':'{{csrf_token()}}'
+                    },
+                }).done(function (response) {
+                    var url = response.data.url;
+                    fileObj.parent().find('#image').attr('value', url);
+                    fileObj.parent().find('#preview').attr('src', url);
+                }).fail(function (response) {
+                    console.log(response);
+                });
+            });
+        });
+    </script>
 @endsection
 

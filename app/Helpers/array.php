@@ -144,6 +144,28 @@ if( ! function_exists('create_node_tree')){
     }
 }
 
+if( ! function_exists('create_articlecat_list')){
+
+    /**
+     * 生成文章栏目二维数组
+     * zfc 2016年08月24日14:48:20
+     * @param        $data
+     * @param int    $parent_id
+     * @param string $name
+     *
+     * @return array
+     */
+    function create_articlecat_list($data, $parent_id = 0, $name = 'child')
+    {
+        $tree = [];
+
+        foreach ($data as $item) {
+            $tree[$item['id']] = $item;
+        }
+        return $tree;
+    }
+}
+
 if( ! function_exists('get_week_start_time_and_end_date')){
 
     /**

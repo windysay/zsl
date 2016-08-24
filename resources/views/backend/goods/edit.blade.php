@@ -32,7 +32,13 @@
                         </div>
                         <div class="form-group">
                             <label for="logo">图片</label>
-                            <input type="file" class="form-control" id="images" name="images" value="{{$data->images}}">
+                            <input type="file" class="form-control" id="file" name="file">
+                            <input type="hidden" id="image" name="images" value="{{$data->images or ''}}">
+                            @if(!empty($data->images))
+                                <img src="{{$data->images}}" alt="{{$data->title}}" id="preview" style="margin-top: 10px;border-radius: 10px;max-height:100px;">
+                            @else
+                                <img src="" alt="" id="preview" style="margin-top: 10px;border-radius: 10px;max-height:100px;">
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="name">详情</label>
@@ -66,5 +72,32 @@
             </form>
         </div>
     </div>
+@endsection
+@section('after.js')
+    <script type="text/javascript">
+        $(function () {
+            $('#file').on('change', function () {
+                var formdata = new FormData();  //构建空的formdata对象(HTML5)
+                formdata.append("file", $("#file")[0].files[0]); //增加上传文件
+                $.ajax({
+                    url: '{{route("backend.user.upload-avatar")}}',
+                    type: 'POST',
+                    cache: false,
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN':'{{csrf_token()}}'
+                    },
+                }).done(function (response) {
+                    var url = response.data.url;
+                    $('#image').attr('value', url);
+                    $('#preview').attr('src', url);
+                }).fail(function (response) {
+                    console.log(response);
+                });
+            });
+        });
+    </script>
 @endsection
 
