@@ -4,6 +4,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', ['namespace' => 'App\Http\Controllers\API','middleware' => 'api.auth'], function ($api) {
     $api->get('user', 'UserController@index');
+    //个人信息
     $api->post('user/info', 'UserController@info');
     //加盟申请
     $api->post('shop/joinUnionApply', 'ShopController@joinUnionApply');
@@ -15,6 +16,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API','middleware' => '
     $api->post('auth/changeMobile','AuthController@changeMobile');
     //修改头像
     $api->post('user/changeAvatar','UserController@changeAvatar');
+    //上传图片
+    $api->post('user/uploadFile','UserController@uploadFile');
 });
 
 /** 不需要身份验证 */
