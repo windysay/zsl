@@ -7,6 +7,7 @@ use App\Http\Requests\Form\ArticleCreateForm;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * 供需信息管理控制器
@@ -135,16 +136,25 @@ class GoodsController extends Controller
         }
     }
 
-    //商户通过审核
+    //供需通过审核
     public function pass(){
         $id = Input::get('id');
         if($id){
-            GoodsRepository::saveById($id, ['ispass'=>1]);
+            try{
+                GoodsRepository::saveById($id, ['ispass'=>1]);
+            }catch (\LogicException $e){
+                return response()->json(['success' => 'false',]);
+            }
+            /** 发送邮件通知商户 */
+            $text = '您好, 你的申请已经通过审核. ——中国联盟商会';
+            $title = '你的申请已经通过审核';
+            Mail::send('emails.message', ['text' => $text], function ($email) use ($text, $title) {
+                $email->to(env('ADMIN_EMAIL'))->subject($title);
+            });
             return response()->json(['success' => 'true',]);
         }else{
             return response()->json(['success' => 'false',]);
         }
-
     }
 
 }

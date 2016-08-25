@@ -30,16 +30,16 @@
                                     @if(Auth::user()->id == $item->id)
                                         <a href="{{route('backend.user.edit',['id'=>$item->id])}}" class="btn btn-primary btn-flat">编辑</a>
                                     @endif
-                                    {{--<button class="btn btn-danger btn-flat"--}}
-                                            {{--data-url="{{URL::to('backend/user/'.$item->id)}}"--}}
-                                            {{--data-toggle="modal"--}}
-                                            {{--data-target="#delete-modal"--}}
-                                    {{-->--}}
-                                        {{--删除--}}
-                                    {{--</button>--}}
-                                    {{--<a href="{{route('backend.email.send',['id'=>$item->id])}}" class="btn bg-orange btn-flat">测试发送文字邮件</a>--}}
-                                    {{--<a href="{{route('backend.email.sendPicture',['id'=>$item->id])}}" class="btn btn-info btn-flat">测试发送图文邮件</a>--}}
-                                    {{--<a href="{{route('backend.email.sendFile',['id'=>$item->id])}}" class="btn btn-facebook btn-flat">测试发送附件邮件</a>--}}
+                                    <button class="btn btn-danger btn-flat"
+                                            data-url="{{URL::to('backend/user/'.$item->id)}}"
+                                            data-toggle="modal"
+                                            data-target="#delete-modal"
+                                    >
+                                        删除
+                                    </button>
+                                    <a href="{{route('backend.email.send',['id'=>$item->id])}}" class="btn bg-orange btn-flat">测试发送文字邮件</a>
+                                    <a href="{{route('backend.email.sendPicture',['id'=>$item->id])}}" class="btn btn-info btn-flat">测试发送图文邮件</a>
+                                    <a href="{{route('backend.email.sendFile',['id'=>$item->id])}}" class="btn btn-facebook btn-flat">测试发送附件邮件</a>
                                 </td>
                             </tr>
                         @endforeach

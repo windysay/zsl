@@ -8,6 +8,7 @@ use Dingo\Api\Exception\StoreResourceFailedException;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
@@ -41,6 +42,11 @@ class ShopController extends BaseController
             if(ShopRepository::create($request)){
                 $message = '申请已提交,工作人员会尽快给您答复';
                 /** 发送邮件通知管理员 */
+                $text = '管理员您好, 有新的商户加盟, 请尽快审核处理. 传送门>>'.url('/backend/shop');
+                $title = '有新的客户加盟';
+                Mail::send('emails.message', ['text' => $text], function ($email) use ($text, $title) {
+                    $email->to(env('ADMIN_EMAIL'))->subject($title);
+                });
             }else{
                 throw new \LogicException('网络出错,请检查网络连接',302);
             }
@@ -81,6 +87,11 @@ class ShopController extends BaseController
             $data = ShopRepository::create($request);
             if($data){
                 /** 发送邮件通知管理员 */
+                $text = '管理员您好, 有新的黄页申请, 请尽快审核处理. 传送门>>'.url('/backend/shop');
+                $title = '有新的黄页申请';
+                Mail::send('emails.message', ['text' => $text], function ($email) use ($text, $title) {
+                    $email->to(env('ADMIN_EMAIL'))->subject($title);
+                });
             }
         }catch (\LogicException $e){
             $json['message'] = $e->getMessage();

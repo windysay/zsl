@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * 供需发布管理控制器
@@ -41,6 +42,11 @@ class GoodsController extends BaseController
             if(GoodsRepository::create($request)){
                 $message = '申请已提交,工作人员会尽快给您审核';
                 /** 发送邮件通知管理员 */
+                $text = '管理员您好, 有新的供需发布信息, 请尽快审核处理. 传送门>>'.url('/backend/goods');
+                $title = '有新的供需发布信息';
+                Mail::send('emails.message', ['text' => $text], function ($email) use ($text, $title) {
+                    $email->to(env('ADMIN_EMAIL'))->subject($title);
+                });
             }else{
                 throw new \LogicException('网络出错,请检查网络连接',302);
             }
