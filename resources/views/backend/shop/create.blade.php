@@ -157,7 +157,7 @@
                 });
             });
             $('#file1').on('change', function () {
-                fileObj = $(this);
+                var fileObj = $(this);
                 var formdata = new FormData();  //构建空的formdata对象(HTML5)
                 formdata.append("file", fileObj[0].files[0]); //增加上传文件
                 $.ajax({

@@ -30,24 +30,24 @@
         </div>
     </nav>
     <div id="owl-hero" class="owl-carousel owl-theme">
-        <div class="item" style="background-image: url(http://o93kt6djh.bkt.clouddn.com/slide-tianmao.jpeg)">
+        <div class="item" style="background-image: url(http://o93kt6djh.bkt.clouddn.com/IMG_20150920_185029_HDR.jpg)">
             <div class="caption">
                 <h6>我叫天猫</h6>
                 <h1>工作是<span>卖萌</span></h1>
                 <a class="btn btn-transparent" href="https://github.com/luisedware/CowCat" target="_blank">
                     点赞
                 </a>
-                <a class="btn btn-transparent" href="#">打赏</a>
+                <a class="btn btn-transparent" href="http://o93kt6djh.bkt.clouddn.com/WechatIMG1.png" data-lightbox="image-0" data-title="CowCat">打赏</a>
             </div>
         </div>
-        <div class="item" style="background-image: url(http://o93kt6djh.bkt.clouddn.com/slide-summer.jpeg)">
+        <div class="item" style="background-image: url(http://o93kt6djh.bkt.clouddn.com/IMG_20150920_185006_HDR.jpg)">
             <div class="caption">
                 <h6>我叫 <span>Summer</span></h6>
                 <h1>工作也是<span>卖萌</span></h1>
                 <a class="btn btn-transparent" href="https://github.com/luisedware/CowCat" target="_blank">
                     点赞
                 </a>
-                <a class="btn btn-transparent" href="#">打赏</a>
+                <a class="btn btn-transparent" href="http://o93kt6djh.bkt.clouddn.com/WechatIMG1.png" data-lightbox="image-0" data-title="CowCat">打赏</a>
             </div>
         </div>
     </div>
