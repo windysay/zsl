@@ -63,13 +63,12 @@ class GoodsController extends BaseController
     }
 
     /** 获取供需列表
-     *  type [空]全部 [give]供应 [need]需求
+     *  type [all]全部 [give]供应 [need]需求
      *  return json
      */
-    public function getList()
+    public function getList($type)
     {
-        $type = Input::get('type');
-        if($type){
+        if($type!='all'){
             $map['type'] = $type;
         }
         $map['ispass'] = 1; //审核通过
@@ -81,9 +80,9 @@ class GoodsController extends BaseController
         return $json;
     }
 
-    public function detail()
+    public function detail($id)
     {
-        $data = GoodsRepository::find(Input::get('id'));
+        $data = GoodsRepository::find($id);
 
         if($data){
             $json['message'] = '供需详情获取成功';

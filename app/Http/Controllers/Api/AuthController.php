@@ -220,6 +220,25 @@ class AuthController extends BaseController
         $json['status_code'] = 200;
         $json['data'] = null;
         return $json;
+    }
 
+    /**
+     * 退出登录
+     *
+     * @return null
+     */
+    public function logout(){
+        try{
+            Auth::logout();
+        }catch(\LogicException $e){
+            $json['message'] = $e->getMessage();
+            $json['status_code'] = $e->getCode();
+            $json['data'] = null;
+            return $json;
+        }
+        $json['message'] = '登录退出成功';
+        $json['status_code'] = 200;
+        $json['data'] = null;
+        return $json;
     }
 }

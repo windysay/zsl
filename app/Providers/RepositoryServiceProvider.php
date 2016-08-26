@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Repositories\ArticleCatRepository;
+use App\Repositories\BusinessCircleRepository;
 use App\Repositories\GoodsRepository;
 use App\Repositories\ShopRepository;
 use App\Repositories\UserRepository;
@@ -11,6 +12,7 @@ use App\Repositories\MenuRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\ActionRepository;
 use App\Repositories\PermissionRepository;
+use App\Repositories\WeiboRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -44,6 +46,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->registerArticleRepository();
         $this->registerUserProfileRepository();
         $this->registerGoodsRepository();
+        $this->registerWeiboRepository();
+        $this->registerBusinessCircleRepository();
     }
 
     /**
@@ -159,6 +163,30 @@ class RepositoryServiceProvider extends ServiceProvider
             $validator = $app['validator'];
 
             return new GoodsRepository($permission, $validator);
+
+        });
+    }
+
+    public function registerWeiboRepository()
+    {
+        $this->app->singleton('weiborepository', function ($app) {
+            $model = config('repository.models.weibo');
+            $permission = new $model();
+            $validator = $app['validator'];
+
+            return new WeiboRepository($permission, $validator);
+
+        });
+    }
+
+    public function registerBusinessCircleRepository()
+    {
+        $this->app->singleton('businesscirclerepository', function ($app) {
+            $model = config('repository.models.business-circle');
+            $permission = new $model();
+            $validator = $app['validator'];
+
+            return new BusinessCircleRepository($permission, $validator);
 
         });
     }

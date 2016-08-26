@@ -11,6 +11,8 @@ return [
         'article'    => 'App\Models\Article',
         'user-profile' => 'App\Models\UserProfile',
         'goods'      => 'App\Models\Goods',
+        'weibo'      => 'App\Models\Weibo',
+        'business-circle'      => 'App\Models\BusinessCircle',
     ],
     'page-limit' => 10,
 ];

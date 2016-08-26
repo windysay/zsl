@@ -6,6 +6,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API','middleware' => '
     $api->get('user', 'UserController@index');
     //个人信息
     $api->post('user/info', 'UserController@info');
+    //退出登录
+    $api->post('auth/logout', 'AuthController@logout');
     //加盟申请
     $api->post('shop/joinUnionApply', 'ShopController@joinUnionApply');
     //加入黄页申请
@@ -16,8 +18,16 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API','middleware' => '
     $api->post('auth/changeMobile','AuthController@changeMobile');
     //修改头像
     $api->post('user/changeAvatar','UserController@changeAvatar');
-    //上传图片
+    //文件上传
     $api->post('user/uploadFile','UserController@uploadFile');
+    //发布商圈微博
+    $api->post('weibo/create','WeiboController@create');
+    //评论商圈微博
+    $api->post('weibo/comment','WeiboController@comment');
+    //商圈微博点赞
+    $api->get('weibo/like/{id}','WeiboController@like');
+    //商圈微博分享
+    $api->get('weibo/share/{id}','WeiboController@share');
 });
 
 /** 不需要身份验证 */
@@ -35,16 +45,20 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API'], function ($api)
     //获取加盟商会列表
     $api->post('shop/getUnionShopList', 'ShopController@getUnionShopList');
     //获取成员企业列表
-    $api->post('shop/getMemberShopList', 'ShopController@getMemberShopList');
+    $api->get('shop/getMemberShopList/{parent_id}', 'ShopController@getMemberShopList');
     //获取商会详情
-    $api->post('shop/getShopDetail', 'ShopController@getShopDetail');
+    $api->get('shop/getShopDetail/{id}', 'ShopController@getShopDetail');
     //商会商号
     $api->get('shop/store', 'ShopController@getShopStore');
     //商会类型
     $api->get('shop/cat', 'ShopController@getStopCat');
     //供需列表
-    $api->post('goods/getList', 'GoodsController@getList');
+    $api->get('goods/getList/{type}', 'GoodsController@getList');
     //供需详情
-    $api->post('goods/detail', 'GoodsController@detail');
+    $api->get('goods/detail/{id}', 'GoodsController@detail');
+    //获取商圈微博列表
+    $api->get('weibo/getList/{id}','WeiboController@getList');
+    //商圈微博详情
+    $api->get('weibo/detail/{id}','WeiboController@detail');
 });
 

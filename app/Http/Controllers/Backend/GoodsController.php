@@ -128,7 +128,7 @@ class GoodsController extends Controller
     {
         try {
             if (GoodsRepository::destroy($id)) {
-                return $this->successBackTo("删除文章成功");
+                return $this->successBackTo("删除供需信息成功");
             }
         }
         catch (\Exception $e) {

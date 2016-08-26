@@ -42,6 +42,9 @@ Route::post('goods/pass', [
 ]);
 Route::resource('goods', 'GoodsController');
 
+/** 商圈管理模块 */
+Route::resource('businesscircle', 'BusinessCircleController');
+
 /* 用户管理模块 */
 Route::resource("user", 'UserController');
 Route::get('user/profile/{id}', [

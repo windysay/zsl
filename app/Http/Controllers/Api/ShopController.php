@@ -149,8 +149,7 @@ class ShopController extends BaseController
     }
 
     /** 获取成员企业列表 行业/地区/商号条件筛选 */
-    public function getMemberShopList(){
-        $parent_id = Input::get('parent_id');
+    public function getMemberShopList($parent_id){
         $map['parent_id'] = $parent_id; //显示成员企业
         $map['ispass'] = 1;             //只显示已审核
         $map['status'] = 'active';
@@ -162,8 +161,7 @@ class ShopController extends BaseController
     }
 
     /** 获取商会成员 */
-    public function getShopDetail(){
-        $id = Input::get('id');
+    public function getShopDetail($id){
         $data = ShopRepository::find($id, ['shop_name','shop_descript','addr_code','addr','shop_tel','shop_logo','shop_email','shop_url','lng','lat','shop_qrcode']);
         if($data){
             $json['message'] = '获取商会详情成功';
