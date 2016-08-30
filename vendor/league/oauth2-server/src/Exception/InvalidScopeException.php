@@ -35,7 +35,7 @@ class InvalidScopeException extends OAuthException
         $this->parameter = $parameter;
         parent::__construct(
             sprintf(
-                'The requested scope is invalid, unknown, or malformed. Check the "%s" scope.',
+                '请求的范围是无效的，未知的，或畸形。检查 "％s" 范围.',
                 $parameter
             )
         );

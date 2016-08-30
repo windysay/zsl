@@ -35,7 +35,7 @@ class InvalidGrantException extends OAuthException
         $this->parameter = $parameter;
         parent::__construct(
             sprintf(
-                'The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client. Check the "%s" parameter.',
+                '所提供的授权许可无效，过期，撤销，不匹配的URI在授权请求中使用，或发出到另一客户端的重定向。检查 "％s" 参数.',
                 $parameter
             )
         );

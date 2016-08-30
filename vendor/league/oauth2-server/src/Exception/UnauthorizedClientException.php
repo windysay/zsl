@@ -31,6 +31,6 @@ class UnauthorizedClientException extends OAuthException
      */
     public function __construct()
     {
-        parent::__construct('The client is not authorized to request an access token using this method.');
+        parent::__construct('客户无权使用该方法来请求访问令牌.');
     }
 }

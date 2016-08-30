@@ -31,6 +31,6 @@ class InvalidClientException extends OAuthException
      */
     public function __construct()
     {
-        parent::__construct('Client authentication failed.');
+        parent::__construct('客户端身份验证失败.');
     }
 }

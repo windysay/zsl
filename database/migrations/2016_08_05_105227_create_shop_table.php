@@ -27,7 +27,7 @@ class CreateShopTable extends Migration
             $table->string('shop_banner')->nullable()->comment('商会banner');
             $table->string('shop_tel')->nullable()->comment('客服电话');
             $table->string('shop_email')->nullable()->comment('商会邮箱');
-            $table->string('addr_code')->nullable()->comment('地区id');
+            $table->string('area')->nullable()->comment('省市区');
             $table->string('addr')->nullable()->comment('具体地址');
             $table->string('shop_url')->nullable()->comment('官网链接');
             $table->string('shop_qrcode')->nullable()->comment('二维码');

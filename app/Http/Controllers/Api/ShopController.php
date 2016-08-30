@@ -119,7 +119,7 @@ class ShopController extends BaseController
         if($keyword) $map['shop_name'] = ['like', '%'.$keyword.'%'];
         //print_r(Input::get());die;
         /** 地区筛选暂时先放着,后面补全 */
-        $shopList = ShopRepository::paginateWhere($map, config('repository.page-limit'), ['id','shop_name','addr_code','addr','shop_tel','shop_logo']);
+        $shopList = ShopRepository::paginateWhere($map, config('repository.page-limit'), ['id','shop_name','area','addr','shop_tel','shop_logo']);
         $json['message'] = '获取黄页列表成功';
         $json['status_code'] = 200;
         $json['data'] = $shopList;
@@ -141,7 +141,7 @@ class ShopController extends BaseController
         if($keyword) $map['shop_name'] = ['like', '%'.$keyword.'%'];
         //print_r($map);die;
         /** 地区筛选暂时先放着,后面补全 */
-        $shopList = ShopRepository::paginateWhere($map, config('repository.page-limit'), ['id','shop_name','addr_code','addr','shop_tel','shop_logo']);
+        $shopList = ShopRepository::paginateWhere($map, config('repository.page-limit'), ['id','shop_name','area','addr','shop_tel','shop_logo']);
         $json['message'] = '获取加盟商户列表成功';
         $json['status_code'] = 200;
         $json['data'] = $shopList;
@@ -153,7 +153,7 @@ class ShopController extends BaseController
         $map['parent_id'] = $parent_id; //显示成员企业
         $map['ispass'] = 1;             //只显示已审核
         $map['status'] = 'active';
-        $shopList = ShopRepository::paginateWhere($map, config('repository.page-limit'), ['id','shop_name','addr_code','addr','shop_tel','shop_logo']);
+        $shopList = ShopRepository::paginateWhere($map, config('repository.page-limit'), ['id','shop_name','area','addr','shop_tel','shop_logo']);
         $json['message'] = '获取成员企业列表成功';
         $json['status_code'] = 200;
         $json['data'] = $shopList;
@@ -162,7 +162,7 @@ class ShopController extends BaseController
 
     /** 获取商会成员 */
     public function getShopDetail($id){
-        $data = ShopRepository::find($id, ['shop_name','shop_descript','addr_code','addr','shop_tel','shop_logo','shop_email','shop_url','lng','lat','shop_qrcode']);
+        $data = ShopRepository::find($id, ['shop_name','shop_descript','area','addr','shop_tel','shop_logo','shop_email','shop_url','lng','lat','shop_qrcode']);
         if($data){
             $json['message'] = '获取商会详情成功';
             $json['status_code'] = 200;

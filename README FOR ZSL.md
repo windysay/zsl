@@ -11,7 +11,7 @@ Free,open-source CMS based on the Laravel PHP Framework
 
 - [√] 邮件系统完善
 - [√] 图片上传功能完善
-- [x] 省市区三级联动
+- [√] 省市区三级联动
 - [x] API文档管理系统
 
 ## 未完成功能API接口（Todo）

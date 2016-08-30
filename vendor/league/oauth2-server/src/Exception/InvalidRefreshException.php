@@ -31,6 +31,6 @@ class InvalidRefreshException extends OAuthException
      */
     public function __construct()
     {
-        parent::__construct('The refresh token is invalid.');
+        parent::__construct('刷新令牌无效.');
     }
 }

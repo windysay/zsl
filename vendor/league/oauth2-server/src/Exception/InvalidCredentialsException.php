@@ -31,6 +31,6 @@ class InvalidCredentialsException extends OAuthException
      */
     public function __construct()
     {
-        parent::__construct('The user credentials were incorrect.');
+        parent::__construct('用户凭据不正确.');
     }
 }

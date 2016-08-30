@@ -31,6 +31,6 @@ class AccessDeniedException extends OAuthException
      */
     public function __construct()
     {
-        parent::__construct('The resource owner or authorization server denied the request.');
+        parent::__construct('资源所有者或授权服务器拒绝请求.');
     }
 }

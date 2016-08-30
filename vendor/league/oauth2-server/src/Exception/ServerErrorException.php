@@ -32,7 +32,7 @@ class ServerErrorException extends OAuthException
     public function __construct($parameter = null)
     {
         $this->parameter = $parameter;
-        $parameter = is_null($parameter) ? 'The authorization server encountered an unexpected condition which prevented it from fulfilling the request.' : $parameter;
+        $parameter = is_null($parameter) ? '授权服务器遇到它，阻止它完成请求的意外情况.' : $parameter;
         parent::__construct($parameter);
 
     }

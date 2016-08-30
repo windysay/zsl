@@ -1,5 +1,6 @@
 @extends("backend.layout.main")
-
+<link href="{{ asset('/assets/backend/plugins/city-picker/city-picker.css') }}" rel="stylesheet" type="text/css">
+<style>.city-picker-span{width:100% !important;}</style>
 @section("content")
     <div class="row">
         <div class="col-md-12">
@@ -69,6 +70,10 @@
                             <label for="email">邮箱</label>
                             <input type="text" class="form-control" id="email" name="shop_email" placeholder="邮箱" value="{{old('shop_email')}}">
                         </div>
+                        <div class="form-group" style="position: relative;">
+                            <label for="area">省/市/区</label>
+                            <input readonly type="text" readonly data-toggle="city-picker" name="area" value="{{old('area')}}">
+                        </div>
                         <div class="form-group">
                             <label for="addr">详细地址</label>
                             <input type="text" class="form-control" id="addr" name="addr" placeholder="详细地址" value="{{old('addr')}}">
@@ -132,6 +137,8 @@
     </div>
 @endsection
 @section('after.js')
+    <script type="text/javascript" src="{{ URL::asset('/assets/backend/plugins/city-picker/city-picker.data.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('/assets/backend/plugins/city-picker/city-picker.min.js') }}"></script>
     <script type="text/javascript">
         $(function () {
             $('#file').on('change', function () {

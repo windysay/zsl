@@ -35,7 +35,7 @@ class InvalidRequestException extends OAuthException
         $this->parameter = $parameter;
         parent::__construct(
             sprintf(
-                'The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. Check the "%s" parameter.',
+                '缺少必需的参数要求，包括一个无效的参数值，包括参数不止一次，或者说是不正常的。检查 "％s" 参数.',
                 $parameter
             )
         );

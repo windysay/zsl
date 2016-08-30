@@ -35,7 +35,7 @@ class UnsupportedGrantTypeException extends OAuthException
         $this->parameter = $parameter;
         parent::__construct(
             sprintf(
-                'The authorization grant type "%s" is not supported by the authorization server.',
+                '授权许可类型 "％s" 不被授权服务器支持.',
                 $parameter
             )
         );
