@@ -15,6 +15,8 @@ class CreateWeiboTable extends Migration
         Schema::create('weibo', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->string('avatar')->nullable()->comment('头像');
+            $table->string('username')->nullable()->comment('用户名');
             $table->integer('business_id')->unsigned()->comment('商圈id');
             $table->text('content')->nullable()->comment('文字');
             $table->text('images')->nullable()->comment('图片');

@@ -17,7 +17,7 @@ Free,open-source CMS based on the Laravel PHP Framework
 ## 未完成功能API接口（Todo）
 - [√] 修改登录密码
 - [√] 修改头像
-- [√] 商圈列表、详情、后台 - [x]评论建表
+- [√] 商圈列表、详情、后台 - [√]评论建表
 - [x] 首页挂件
 - [x] 会员私享
 

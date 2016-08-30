@@ -23,7 +23,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API','middleware' => '
     //发布商圈微博
     $api->post('weibo/create','WeiboController@create');
     //评论商圈微博
-    $api->post('weibo/comment','WeiboController@comment');
+    $api->post('weibo/comment/{id}','WeiboController@comment');
     //商圈微博点赞
     $api->get('weibo/like/{id}','WeiboController@like');
     //商圈微博分享

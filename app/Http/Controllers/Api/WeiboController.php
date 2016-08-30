@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Facades\CommentRepository;
 use App\Facades\WeiboRepository;
 use App\Http\Controllers\BaseController;
 use Dingo\Api\Exception\StoreResourceFailedException;
@@ -68,9 +69,9 @@ class WeiboController extends BaseController
     public function detail($id)
     {
         try{
-            $data = WeiboRepository::find($id);
+            $data['detail'] = WeiboRepository::find($id);
             /** 获取评论列表 */
-
+            $data['comment'] = CommentRepository::paginateWhere(['weibo_id'=>$id], config('repository.page-limit'));
         }catch(\LogicException $e){
             $json['message'] = $e->getMessage();
             $json['status_code'] = $e->getCode();
@@ -89,8 +90,15 @@ class WeiboController extends BaseController
      */
     public function comment($id){
         try{
-            //$requset->only(['id','content']);
+            $data['content'] = Input::get('content');
+            $data['weibo_id'] = $id;
+            $data['user_id'] = Auth::id();
+            $data['avatar'] = Auth::user()->avatar;
+            $data['username'] = Auth::user()->name;
+            CommentRepository::create($data);
 
+            $weibo = WeiboRepository::find($id);
+            WeiboRepository::saveById($id,['comment'=>$weibo->comment+1]);
         }catch(\LogicException $e){
             $json['message'] = '评论保存失败';
             $json['status_code'] = $e->getCode();

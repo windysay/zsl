@@ -12,7 +12,8 @@ return [
         'user-profile' => 'App\Models\UserProfile',
         'goods'      => 'App\Models\Goods',
         'weibo'      => 'App\Models\Weibo',
-        'business-circle'      => 'App\Models\BusinessCircle',
+        'business-circle' => 'App\Models\BusinessCircle',
+        'comment'    => 'App\Models\Comment',
     ],
     'page-limit' => 10,
 ];

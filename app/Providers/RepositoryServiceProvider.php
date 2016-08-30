@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repositories\ArticleCatRepository;
 use App\Repositories\BusinessCircleRepository;
+use App\Repositories\CommentRepository;
 use App\Repositories\GoodsRepository;
 use App\Repositories\ShopRepository;
 use App\Repositories\UserRepository;
@@ -48,6 +49,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->registerGoodsRepository();
         $this->registerWeiboRepository();
         $this->registerBusinessCircleRepository();
+        $this->registerCommentRepository();
     }
 
     /**
@@ -187,6 +189,18 @@ class RepositoryServiceProvider extends ServiceProvider
             $validator = $app['validator'];
 
             return new BusinessCircleRepository($permission, $validator);
+
+        });
+    }
+
+    public function registerCommentRepository()
+    {
+        $this->app->singleton('commentrepository', function ($app) {
+            $model = config('repository.models.comment');
+            $permission = new $model();
+            $validator = $app['validator'];
+
+            return new CommentRepository($permission, $validator);
 
         });
     }
