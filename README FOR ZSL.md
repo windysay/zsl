@@ -17,16 +17,16 @@ Free,open-source CMS based on the Laravel PHP Framework
 ## 未完成功能API接口（Todo）
 - [√] 修改登录密码
 - [√] 修改头像
-- [√] 商圈列表、详情、后台 - 建表
+- [√] 商圈列表、详情、后台 - [x]评论建表
 - [x] 首页挂件
-- [x] 会员私享 - 还没构思
+- [x] 会员私享
 
 ## 后续完善（Todo）
 - [x] 登录获取access_token API待优化 目前从数据库中获取最新token
 - [x] APP版本
 - [x] 意见建议
-- [x] 视频上传功能
-- [x] 短信模块
+- [x] 视频上传功能 - 需要重构完善
+- [x] 短信模块 - 需要重构完善
 
 
 [MIT License](http://opensource.org/licenses/MIT)

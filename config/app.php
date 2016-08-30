@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' =>  env('APP_LANGUAGE', 'zh'),
+    'locale' => env('APP_LANGUAGE', 'zh'),
 
     /*
     |--------------------------------------------------------------------------
@@ -164,6 +164,9 @@ return [
         /* SMS短信 */
         Toplan\PhpSms\PhpSmsServiceProvider::class,
         Toplan\Sms\SmsManagerServiceProvider::class,
+
+        GrahamCampbell\Exceptions\ExceptionsServiceProvider::class,
+
     ],
 
     /*
