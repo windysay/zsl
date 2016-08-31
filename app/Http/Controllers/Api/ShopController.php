@@ -110,13 +110,14 @@ class ShopController extends BaseController
         $keyword = Input::get('keyword');
         $cat_id = Input::get('cat_id');
         $store_id = Input::get('store_id');
-        $area_code = Input::get('area_code');
+        $province = Input::get('province');
         $map['parent_id'] = 0;//不显示成员企业
         $map['ispass'] = 1;   //只显示已审核
         $map['status'] = 'active';
         if($cat_id) $map['cat_id'] = $cat_id;
         if($store_id) $map['store_id'] = $store_id;
         if($keyword) $map['shop_name'] = ['like', '%'.$keyword.'%'];
+        if($province) $map['area'] = ['like', $province.'%'];
         //print_r(Input::get());die;
         /** 地区筛选暂时先放着,后面补全 */
         $shopList = ShopRepository::paginateWhere($map, config('repository.page-limit'), ['id','shop_name','area','addr','shop_tel','shop_logo']);
@@ -131,7 +132,7 @@ class ShopController extends BaseController
         $keyword = Input::get('keyword');
         $cat_id = Input::get('cat_id');
         $store_id = Input::get('store_id');
-        $area_code = Input::get('area_code');
+        $province = Input::get('province');
         $map['ispartner'] = 1;  //联盟商会成员
         $map['parent_id'] = 0;  //不显示成员企业
         $map['ispass'] = 1;     //只显示已审核
@@ -139,6 +140,7 @@ class ShopController extends BaseController
         if($cat_id) $map['cat_id'] = $cat_id;
         if($store_id) $map['store_id'] = $store_id;
         if($keyword) $map['shop_name'] = ['like', '%'.$keyword.'%'];
+        if($province) $map['area'] = ['like', $province.'%'];
         //print_r($map);die;
         /** 地区筛选暂时先放着,后面补全 */
         $shopList = ShopRepository::paginateWhere($map, config('repository.page-limit'), ['id','shop_name','area','addr','shop_tel','shop_logo']);
@@ -184,9 +186,16 @@ class ShopController extends BaseController
     }
 
     public function getStopCat(){
-        $json['message'] = '获取商会行业';
+        $json['message'] = '获取商会行业成功';
         $json['status_code'] = 200;
         $json['data'] = config('shop.shop_cat');
+        return $json;
+    }
+
+    public function getProvince(){
+        $json['message'] = '获取商会省份成功';
+        $json['status_code'] = 200;
+        $json['data'] = config('shop.province');
         return $json;
     }
 }

@@ -52,6 +52,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API'], function ($api)
     $api->get('shop/store', 'ShopController@getShopStore');
     //商会类型
     $api->get('shop/cat', 'ShopController@getStopCat');
+    //获取省份
+    $api->get('shop/province', 'ShopController@getProvince');
     //供需列表
     $api->get('goods/getList/{type}', 'GoodsController@getList');
     //供需详情
