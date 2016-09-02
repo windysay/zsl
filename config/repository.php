@@ -14,6 +14,7 @@ return [
         'weibo'      => 'App\Models\Weibo',
         'business-circle' => 'App\Models\BusinessCircle',
         'comment'    => 'App\Models\Comment',
+        'template'   => 'App\Models\Template',
     ],
     'page-limit' => 10,
 ];

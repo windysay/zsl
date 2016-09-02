@@ -36,6 +36,7 @@ return array(
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateShopTable' => $baseDir . '/database/migrations/2016_08_05_105227_create_shop_table.php',
     'CreateSmsTable' => $baseDir . '/database/migrations/2015_12_21_111514_create_sms_table.php',
+    'CreateTemplateTable' => $baseDir . '/database/migrations/2016_09_02_161317_create_template_table.php',
     'CreateUserProfileTable' => $baseDir . '/database/migrations/2016_08_15_144949_create_user_profile_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'CreateWeiboTable' => $baseDir . '/database/migrations/2016_08_26_144949_create_weibo_table.php',

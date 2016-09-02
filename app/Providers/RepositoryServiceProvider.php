@@ -7,6 +7,7 @@ use App\Repositories\BusinessCircleRepository;
 use App\Repositories\CommentRepository;
 use App\Repositories\GoodsRepository;
 use App\Repositories\ShopRepository;
+use App\Repositories\TemplateRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\UserProfileRepository;
 use App\Repositories\MenuRepository;
@@ -50,6 +51,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->registerWeiboRepository();
         $this->registerBusinessCircleRepository();
         $this->registerCommentRepository();
+        $this->registerTemplateRepository();
     }
 
     /**
@@ -204,5 +206,18 @@ class RepositoryServiceProvider extends ServiceProvider
 
         });
     }
+
+    public function registerTemplateRepository()
+    {
+        $this->app->singleton('templaterepository', function ($app) {
+            $model = config('repository.models.template');
+            $permission = new $model();
+            $validator = $app['validator'];
+
+            return new TemplateRepository($permission, $validator);
+
+        });
+    }
+
 
 }

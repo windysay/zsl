@@ -119,7 +119,6 @@ class ShopController extends BaseController
         if($keyword) $map['shop_name'] = ['like', '%'.$keyword.'%'];
         if($province) $map['area'] = ['like', $province.'%'];
         //print_r(Input::get());die;
-        /** 地区筛选暂时先放着,后面补全 */
         $shopList = ShopRepository::paginateWhere($map, config('repository.page-limit'), ['id','shop_name','area','addr','shop_tel','shop_logo']);
         $json['message'] = '获取黄页列表成功';
         $json['status_code'] = 200;
@@ -142,7 +141,6 @@ class ShopController extends BaseController
         if($keyword) $map['shop_name'] = ['like', '%'.$keyword.'%'];
         if($province) $map['area'] = ['like', $province.'%'];
         //print_r($map);die;
-        /** 地区筛选暂时先放着,后面补全 */
         $shopList = ShopRepository::paginateWhere($map, config('repository.page-limit'), ['id','shop_name','area','addr','shop_tel','shop_logo']);
         $json['message'] = '获取加盟商户列表成功';
         $json['status_code'] = 200;
